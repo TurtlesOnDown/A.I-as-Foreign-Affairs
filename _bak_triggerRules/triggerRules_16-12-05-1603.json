@@ -1,0 +1,200 @@
+{
+	"fileName": "triggerRules",
+	"type": "trigger",
+	"rules": [
+		{
+			"name": "Enemy of my enemy is my friend",
+			"conditions": [
+				{
+					"class": "relationships",
+					"type": "at war",
+					"first": "someoneA",
+					"second": "someoneB",
+					"value": true
+				},
+				{
+					"class": "relationships",
+					"type": "at war",
+					"first": "someoneC",
+					"second": "someoneB",
+					"value": true
+				},
+				{
+					"class": "relationships",
+					"type": "allied",
+					"first": "someoneA",
+					"second": "someoneC",
+					"value": false
+				}
+			],
+			"effects": [
+				{
+					"class": "relationships",
+					"type": "allied",
+					"first": "someoneA",
+					"second": "someoneC",
+					"value": true
+				}
+			],
+			"origin": "triggerRules",
+			"id": "triggerRules_1"
+		},
+		{
+			"name": "Allies follow into battle",
+			"conditions": [
+				{
+					"class": "relationships",
+					"type": "at war",
+					"first": "someoneA",
+					"second": "someoneB",
+					"value": true
+				},
+				{
+					"class": "relationships",
+					"type": "allied",
+					"first": "someoneA",
+					"second": "someoneC",
+					"value": true
+				},
+				{
+					"class": "relationships",
+					"type": "at war",
+					"first": "someoneC",
+					"second": "someoneB",
+					"value": false
+				}
+			],
+			"effects": [
+				{
+					"class": "relationships",
+					"type": "at war",
+					"first": "someoneC",
+					"second": "someoneB",
+					"value": true
+				}
+			],
+			"origin": "triggerRules",
+			"id": "triggerRules_2"
+		},
+		{
+			"name": "Break relations",
+			"conditions": [
+				{
+					"class": "relations",
+					"type": "relations",
+					"first": "someoneA",
+					"second": "someoneB",
+					"value": 50,
+					"operator": "<"
+				},
+				{
+					"class": "relationships",
+					"type": "allied",
+					"first": "someoneA",
+					"second": "someoneB",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "relationships",
+					"type": "allied",
+					"first": "someoneA",
+					"second": "someoneB",
+					"value": false
+				}
+			],
+			"origin": "triggerRules",
+			"id": "triggerRules_3"
+		},
+		{
+			"name": "Start war",
+			"conditions": [
+				{
+					"class": "relations",
+					"type": "relations",
+					"first": "someoneA",
+					"second": "someoneB",
+					"value": 0
+				},
+				{
+					"class": "relationships",
+					"type": "at war",
+					"first": "someoneA",
+					"second": "someoneB",
+					"value": false
+				}
+			],
+			"effects": [
+				{
+					"class": "relationships",
+					"type": "at war",
+					"first": "someoneA",
+					"second": "someoneB",
+					"value": true
+				},
+				{
+					"class": "relations",
+					"type": "relations",
+					"first": "someoneB",
+					"second": "someoneA",
+					"value": 20
+				}
+			],
+			"origin": "triggerRules",
+			"id": "triggerRules_4"
+		},
+		{
+			"name": "Nations Hate militarization",
+			"conditions": [
+				{
+					"class": "trait",
+					"type": "anyone",
+					"first": "someone",
+					"value": true
+				},
+				{
+					"class": "SFDBLabelUndirected",
+					"type": "miltarizing",
+					"first": "SomeoneElse",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "relations",
+					"type": "relations",
+					"first": "someone",
+					"second": "SomeoneElse",
+					"value": 10,
+					"operator": "-"
+				}
+			],
+			"origin": "triggerRules",
+			"id": "triggerRules_5"
+		},
+		{
+			"name": "New Trigger Rule",
+			"conditions": [
+				{
+					"class": "relations",
+					"type": "relations",
+					"first": "someone",
+					"second": "other",
+					"value": 50
+				}
+			],
+			"effects": [
+				{
+					"class": "relations",
+					"type": "relations",
+					"first": "someone",
+					"second": "other",
+					"value": 50
+				}
+			],
+			"origin": "triggerRules",
+			"id": "triggerRules_6"
+		}
+	]
+}

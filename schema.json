@@ -1,0 +1,68 @@
+{
+	"schema": [
+		{
+			"class": "relations",
+			"isBoolean": false,
+			"directionType": "directed",
+			"types": ["relations"],
+			"defaultValue": 50,
+			"minValue": 0,
+			"maxValue": 100,
+			"allowIntent": true
+		},
+		{
+			"class" : "stats",
+			"types" : ["army"],
+			"isBoolean" : false,
+			"directionType" : "undirected",
+			"defaultValue" : 0,
+			"maxValue" : 100,
+			"minValue" : 0,
+			"allowIntent" : true
+		},
+		{
+			"class" : "resources",
+			"isBoolean" : true,
+			"directionType" : "undirected",
+			"types" : ["food","metal","fuel"],
+			"allowIntent" : false,
+			"defaultValue" : false
+		},
+		{
+			"class" : "resourceAmount",
+			"isBoolean" : false,
+			"directionType" : "undirected",
+			"types" : ["foodamount","metalamount","fuelamount"],
+			"allowIntent" : true,
+			"defaultValue" : 0,
+			"maxValue" : 100,
+			"minValue" : 0
+		},
+		{
+			"class" : "trait",
+			"isBoolean" : true,
+			"directionType" : "undirected",
+			"types" : ["neutral","aggressive","friendly","basic","anyone"],
+			"allowIntent" : false,
+			"defaultValue" : false
+		},
+		{
+			"class": "relationships",
+			"isBoolean": true,
+			"directionType": "reciprocal",
+			"types": ["allied","at war"],
+			"defaultValue": false,
+			"allowIntent": true
+		},
+		{
+			"class": "SFDBLabelUndirected",
+			"types": ["miltarizing"],
+			"isBoolean": true,
+			"directionType": "undirected",
+			"defaultValue": false,
+			"allowIntent": false,
+			"duration": 0
+		}
+	]
+}
+

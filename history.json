@@ -1,0 +1,136 @@
+{
+  "history": [{
+    "pos": 0,
+    "data": [
+      {
+        "class" : "trait",
+        "type" : "neutral",
+        "first" : "swiss",
+        "value" : true
+      },
+
+      {
+        "class" : "trait",
+        "type" : "aggressive",
+        "first" : "america",
+        "value" : true
+      },
+
+      {
+        "class" : "trait",
+        "type" : "friendly",
+        "first" : "england",
+        "value" : true
+      },
+
+      {
+        "class" : "trait",
+        "type" : "basic",
+        "first" : "boring",
+        "value" : true
+      },
+
+      {
+        "class" : "trait",
+        "type" : "anyone",
+        "first" : "swiss",
+        "value" : true
+      },
+
+      {
+        "class" : "trait",
+        "type" : "anyone",
+        "first" : "america",
+        "value" : true
+      },
+
+      {
+        "class" : "trait",
+        "type" : "anyone",
+        "first" : "england",
+        "value" : true
+      },
+
+      {
+        "class" : "trait",
+        "type" : "anyone",
+        "first" : "boring",
+        "value" : true
+      },
+
+      {
+        "class" : "resources",
+        "type" : "food",
+        "first" : "england",
+        "value" : true
+      },
+
+      {
+        "class" : "resources",
+        "type" : "fuel",
+        "first" : "america",
+        "value" : true
+      },
+
+      {
+        "class" : "resourceAmount",
+        "type" : "foodamount",
+        "first" : "england",
+        "value" : 30
+      },
+
+      {
+        "class" : "resourceAmount",
+        "type" : "fuelamount",
+        "first" : "america",
+        "value" : 30
+      },
+
+      {
+        "class" : "resources",
+        "type" : "metal",
+        "first" : "swiss",
+        "value" : true
+      },
+
+      {
+        "class" : "resourceAmount",
+        "type" : "metalamount",
+        "first" : "swiss",
+        "value" : 30
+      },
+
+      {
+        "class" : "relations",
+        "type" : "relations",
+        "first" : "america",
+        "second": "swiss",
+        "value" : 0
+      },
+
+      {
+        "class" : "relations",
+        "type" : "relations",
+        "first" : "boring",
+        "second": "england",
+        "value" : 0
+      },
+
+      {
+        "class" : "relations",
+        "type" : "relations",
+        "first" : "swiss",
+        "second": "england",
+        "value" : 90
+      },
+
+      {
+        "class" : "relations",
+        "type" : "relations",
+        "first" : "england",
+        "second": "swiss",
+        "value" : 90
+      }
+    ]}
+  ]
+}

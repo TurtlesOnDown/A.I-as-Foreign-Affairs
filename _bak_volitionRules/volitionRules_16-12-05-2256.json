@@ -1,0 +1,359 @@
+{
+	"fileName": "volitionRules",
+	"type": "volition",
+	"rules": [
+		{
+			"name": "Aggressive people want bigger armies",
+			"conditions": [
+				{
+					"class": "trait",
+					"type": "aggressive",
+					"first": "someone",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "stats",
+					"type": "army",
+					"first": "someone",
+					"weight": 10,
+					"intentDirection": true,
+					"value": true
+				}
+			],
+			"origin": "volitionRules",
+			"id": "volitionRules_6"
+		},
+		{
+			"name": "Friendly states want to be friends",
+			"conditions": [
+				{
+					"class": "trait",
+					"type": "friendly",
+					"first": "someone",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "relations",
+					"type": "relations",
+					"first": "someone",
+					"second": "other",
+					"weight": 10,
+					"intentDirection": true,
+					"value": true
+				}
+			],
+			"origin": "volitionRules",
+			"id": "volitionRules_7"
+		},
+		{
+			"name": "Neutral States don't want allies",
+			"conditions": [
+				{
+					"class": "trait",
+					"type": "neutral",
+					"first": "someone",
+					"value": true
+				},
+				{
+					"class": "relations",
+					"type": "relations",
+					"first": "someone",
+					"second": "other",
+					"value": 80,
+					"operator": ">"
+				}
+			],
+			"effects": [
+				{
+					"class": "relations",
+					"type": "relations",
+					"first": "someone",
+					"second": "other",
+					"weight": 10,
+					"intentDirection": false,
+					"value": true
+				}
+			],
+			"origin": "volitionRules",
+			"id": "volitionRules_8"
+		},
+		{
+			"name": "Neutrals Don't want enemies",
+			"conditions": [
+				{
+					"class": "trait",
+					"type": "neutral",
+					"first": "someone",
+					"value": true
+				},
+				{
+					"class": "relations",
+					"type": "relations",
+					"first": "someone",
+					"second": "other",
+					"value": 20,
+					"operator": "<"
+				}
+			],
+			"effects": [
+				{
+					"class": "relations",
+					"type": "relations",
+					"first": "someone",
+					"second": "other",
+					"weight": 10,
+					"intentDirection": true,
+					"value": true
+				}
+			],
+			"origin": "volitionRules",
+			"id": "volitionRules_9"
+		},
+		{
+			"name": "Everyone wants a big army",
+			"conditions": [
+				{
+					"class": "trait",
+					"type": "anyone",
+					"first": "someone",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "stats",
+					"type": "army",
+					"first": "someone",
+					"weight": 3,
+					"intentDirection": true,
+					"value": true
+				}
+			],
+			"origin": "volitionRules",
+			"id": "volitionRules_10"
+		},
+		{
+			"name": "Everyone wants food",
+			"conditions": [
+				{
+					"class": "trait",
+					"type": "anyone",
+					"first": "someone",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "resourceAmount",
+					"type": "foodamount",
+					"first": "someone",
+					"weight": 10,
+					"intentDirection": true,
+					"value": true
+				}
+			],
+			"origin": "volitionRules",
+			"id": "volitionRules_11"
+		},
+		{
+			"name": "Everyone wants metal",
+			"conditions": [
+				{
+					"class": "trait",
+					"type": "anyone",
+					"first": "someone",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "resourceAmount",
+					"type": "metalamount",
+					"first": "someone",
+					"weight": 5,
+					"intentDirection": true,
+					"value": true
+				}
+			],
+			"origin": "volitionRules",
+			"id": "volitionRules_12"
+		},
+		{
+			"name": "Everyone wants fuel",
+			"conditions": [
+				{
+					"class": "trait",
+					"type": "anyone",
+					"first": "someone",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "resourceAmount",
+					"type": "fuelamount",
+					"first": "someone",
+					"weight": 5,
+					"intentDirection": true,
+					"value": true
+				}
+			],
+			"origin": "volitionRules",
+			"id": "volitionRules_13"
+		},
+		{
+			"name": "Allies want to be better allies",
+			"conditions": [
+				{
+					"class": "relationships",
+					"type": "allied",
+					"first": "someone",
+					"second": "other",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "relations",
+					"type": "relations",
+					"first": "someone",
+					"second": "other",
+					"weight": 2,
+					"intentDirection": true,
+					"value": true
+				}
+			],
+			"origin": "volitionRules",
+			"id": "volitionRules_14"
+		},
+		{
+			"name": "Enemies want to remain enemies",
+			"conditions": [
+				{
+					"class": "relationships",
+					"type": "at war",
+					"first": "someone",
+					"second": "other",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "relations",
+					"type": "relations",
+					"first": "someone",
+					"second": "other",
+					"weight": 2,
+					"intentDirection": false,
+					"value": true
+				}
+			],
+			"origin": "volitionRules",
+			"id": "volitionRules_15"
+		},
+		{
+			"name": "Angry People want to go to war",
+			"conditions": [
+				{
+					"class": "relations",
+					"type": "relations",
+					"first": "x",
+					"second": "y",
+					"value": 20,
+					"operator": "<"
+				}
+			],
+			"effects": [
+				{
+					"class": "relations",
+					"type": "relations",
+					"first": "x",
+					"second": "y",
+					"weight": 10,
+					"intentDirection": false,
+					"value": true
+				}
+			],
+			"origin": "volitionRules",
+			"id": "volitionRules_16"
+		},
+		{
+			"name": "friendly people want to become friends",
+			"conditions": [
+				{
+					"class": "relations",
+					"type": "relations",
+					"first": "x",
+					"second": "y",
+					"value": 80
+				}
+			],
+			"effects": [
+				{
+					"class": "relations",
+					"type": "relations",
+					"first": "x",
+					"second": "y",
+					"weight": 10,
+					"intentDirection": true,
+					"value": true
+				}
+			],
+			"origin": "volitionRules",
+			"id": "volitionRules_17"
+		},
+		{
+			"name": "aggressive states dont want friends",
+			"conditions": [
+				{
+					"class": "trait",
+					"type": "aggressive",
+					"first": "someone",
+					"value": true
+				}
+			],
+			"effects": [
+				{
+					"class": "relations",
+					"type": "relations",
+					"first": "someone",
+					"second": "other",
+					"weight": 5,
+					"intentDirection": false,
+					"value": true
+				}
+			],
+			"origin": "volitionRules",
+			"id": "volitionRules_19"
+		},
+		{
+			"name": "New Volition Rule",
+			"conditions": [
+				{
+					"class": "relations",
+					"type": "relations",
+					"first": "someone",
+					"second": "other",
+					"value": 50
+				}
+			],
+			"effects": [
+				{
+					"class": "relations",
+					"type": "relations",
+					"first": "someone",
+					"second": "other",
+					"weight": 5,
+					"intentDirection": true,
+					"value": true
+				}
+			],
+			"origin": "volitionRules",
+			"id": "volitionRules_20"
+		}
+	]
+}

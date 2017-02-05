@@ -1,0 +1,898 @@
+{
+  "fileName" : "actions.json",
+  "actions" : [
+    {
+      "name" : "RAISERELATIONS",
+      "intent" : {
+        "class" : "relations",
+        "type"  : "relations",
+        "intentDirection" : true,
+        "first" : "initiator",
+        "second" : "responder"
+      },
+      "conditions" : [],
+      "influenceRules" : [],
+      "leadsTo" : ["TRADE", "STARTALLIANCE", "ENDWAR"]
+    },
+
+    {
+      "name" : "LOWERRELATIONS",
+      "intent" : {
+        "class" : "relations",
+        "type"  : "relations",
+        "intentDirection" : false,
+        "first" : "initiator",
+        "second" : "responder"
+      },
+      "conditions" : [],
+      "influenceRules" : [],
+      "leadsTo" : ["ATTACK", "STARTWAR", "ENDALLIANCE"]
+    },
+
+    {
+      "name" : "RAISEARMY",
+      "intent" : {
+        "class" : "stats",
+        "type" : "army",
+        "intentDirection" : true,
+        "first" : "initiator"
+      },
+      "conditions" : [],
+      "influenceRules" : [],
+      "leadsTo" : ["recruitSoldiers"]
+    },
+
+    {
+      "name" : "RAISEFOOD",
+      "intent" : {
+        "class" : "resourceAmount",
+        "type"  : "foodamount",
+        "intentDirection" : true,
+        "first" : "initiator",
+        "second": "responder"
+      },
+      "conditions" : [],
+      "influenceRules" : [],
+      "leadsTo" : ["makeFood", "TRADEFORFOOD"]
+    },
+
+    {
+      "name" : "RAISEFUEL",
+      "intent" : {
+        "class" : "resourceAmount",
+        "type"  : "fuelamount",
+        "intentDirection" : true,
+        "first" : "initiator",
+        "second": "responder"
+      },
+      "conditions" : [],
+      "influenceRules" : [],
+      "leadsTo" : ["makeFuel", "TRADEFORFUEL"]
+    },
+
+    {
+      "name" : "RAISEMETAL",
+      "intent" : {
+        "class" : "resourceAmount",
+        "type"  : "metalamount",
+        "intentDirection" : true,
+        "first" : "initiator",
+        "second": "responder"
+      },
+      "conditions" : [],
+      "influenceRules" : [],
+      "leadsTo" : ["makeMetal", "TRADEFORMETAL"]
+    },
+
+    {
+      "name" : "recruitSoldiers",
+      "conditions" : [],
+      "displayName" : "Recruit Soldiers",
+      "influenceRules" : [
+        {
+          "name": "Nations want Bigger Armies",
+          "conditions": [
+            {
+              "class" : "trait",
+              "type" : "anyone",
+              "first" : "initiator",
+              "value" : true
+            }
+          ],
+          "weight" : 10
+        }
+      ],
+      "effects" : [{
+        "class" : "stats",
+        "type" : "army",
+        "first" : "initiator",
+        "operator" : "+",
+        "value" : 5
+      },
+        {
+          "class" : "SFDBLabelUndirected",
+          "type" : "miltarizing",
+          "first" : "initiator",
+          "value" : true
+        }]
+    },
+
+    {
+      "name" : "STARTALLIANCE",
+      "conditions" : [],
+      "influenceRules" : [],
+      "leadsTo" : ["formAlliance"]
+    },
+
+    {
+      "name" : "TRADE",
+      "conditions" : [],
+      "influenceRules" : [],
+      "leadsTo" : ["TRADEFORFOOD", "TRADEFORFUEL", "TRADEFORMETAL"]
+    },
+
+    {
+      "name" : "TRADEFORFOOD",
+      "conditions" : [],
+      "influenceRules" : [],
+      "leadsTo" : ["tradeFuelforFood", "tradeMetalforFood"]
+    },
+
+    {
+      "name" : "TRADEFORFUEL",
+      "conditions" : [],
+      "influenceRules" : [],
+      "leadsTo" : ["tradeFoodforFuel", "tradeMetalforFuel"]
+    },
+
+    {
+      "name" : "TRADEFORMETAL",
+      "conditions" : [],
+      "influenceRules" : [],
+      "leadsTo" : ["tradeFuelforMetal", "tradeFoodforMetal"]
+    },
+
+    {
+      "name" : "ENDWAR",
+      "conditions" : [],
+      "influenceRules" : [],
+      "leadsTo" : ["endWar"]
+    },
+
+    {
+      "name" : "ATTACK",
+      "conditions" : [],
+      "influenceRules" : [],
+      "leadsTo" : ["attackNation"]
+    },
+
+    {
+      "name" : "STARTWAR",
+      "conditions" : [],
+      "influenceRules" : [],
+      "leadsTo" : ["startWar"]
+    },
+
+    {
+      "name" : "ENDALLIANCE",
+      "conditions" : [],
+      "influenceRules" : [],
+      "leadsTo" : ["endAlliance"]
+    },
+
+    {
+      "name" : "formAlliance",
+      "displayName" : "Formed Alliance",
+      "conditions" : [{
+        "class" : "relations",
+        "type"  : "relations",
+        "first" : "initiator",
+        "second" : "responder",
+        "value" : 80,
+        "operator" : ">"
+      },{
+        "class" : "relations",
+        "type" : "relations",
+        "first" : "responder",
+        "second" : "initiator",
+        "operator" : ">",
+        "value" : 80
+      },{
+        "class" : "relationships",
+        "type" : "allied",
+        "first" : "initiator",
+        "second" : "responder",
+        "value" : false
+      }
+      ],
+      "influenceRules" : [],
+      "effects" : [{
+        "class" : "relations",
+        "type" : "relations",
+        "first" : "initiator",
+        "second" : "responder",
+        "operator" : "+",
+        "value" : 5
+      },{
+        "class" : "relations",
+        "type" : "relations",
+        "first" : "responder",
+        "second" : "initiator",
+        "operator" : "+",
+        "value" : 5
+      },{
+        "class" : "relationships",
+        "type" : "allied",
+        "first" : "initiator",
+        "second" : "responder",
+        "value" : true
+      }]
+    },
+
+    {
+      "name" : "endWar",
+      "displayName" : "Ends War",
+      "conditions" : [{
+        "class" : "relations",
+        "type"  : "relations",
+        "first" : "initiator",
+        "second" : "responder",
+        "value" : 20,
+        "operator" : ">"
+      },{
+        "class" : "relations",
+        "type" : "relations",
+        "first" : "responder",
+        "second" : "initiator",
+        "operator" : ">",
+        "value" : 20
+      },{
+        "class" : "relationships",
+        "type" : "at War",
+        "first" : "initiator",
+        "second" : "responder",
+        "value" : true
+      }
+      ],
+      "influenceRules" : [],
+      "effects" : [{
+        "class" : "relations",
+        "type" : "relations",
+        "first" : "initiator",
+        "second" : "responder",
+        "operator" : "+",
+        "value" : 5
+      },{
+        "class" : "relations",
+        "type" : "relations",
+        "first" : "responder",
+        "second" : "initiator",
+        "operator" : "+",
+        "value" : 5
+      },{
+        "class" : "relationships",
+        "type" : "at war",
+        "first" : "initiator",
+        "second" : "responder",
+        "value" : false
+      }]
+    },
+
+    {
+      "name" : "startWar",
+      "displayName" : "Started a War",
+      "conditions" : [{
+        "class" : "relations",
+        "type"  : "relations",
+        "first" : "initiator",
+        "second" : "responder",
+        "value" : 20,
+        "operator" : "<"
+      },{
+        "class" : "relationships",
+        "type" : "at war",
+        "first" : "initiator",
+        "second" : "responder",
+        "value" : false
+      }
+      ],
+      "influenceRules" : [],
+      "effects" : [{
+        "class" : "relations",
+        "type" : "relations",
+        "first" : "initiator",
+        "second" : "responder",
+        "operator" : "-",
+        "value" : 5
+      },{
+        "class" : "relations",
+        "type" : "relations",
+        "first" : "responder",
+        "second" : "initiator",
+        "operator" : "-",
+        "value" : 50
+      },{
+        "class" : "relationships",
+        "type" : "at war",
+        "first" : "initiator",
+        "second" : "responder",
+        "value" : true
+      }]
+    },
+
+    {
+      "name" : "endAlliance",
+      "displayName" : "Ending An Alliance",
+      "conditions" : [{
+        "class" : "relations",
+        "type"  : "relations",
+        "first" : "initiator",
+        "second" : "responder",
+        "value" : 80,
+        "operator" : "<"
+      },{
+        "class" : "Relationships",
+        "type" : "allied",
+        "first" : "initiator",
+        "second" : "responder",
+        "value" : true
+      }
+      ],
+      "influenceRules" : [],
+      "effects" : [{
+        "class" : "relations",
+        "type" : "relations",
+        "first" : "initiator",
+        "second" : "responder",
+        "operator" : "-",
+        "value" : 5
+      },{
+        "class" : "relations",
+        "type" : "relations",
+        "first" : "responder",
+        "second" : "initiator",
+        "operator" : "-",
+        "value" : 20
+      },{
+        "class" : "relationships",
+        "type" : "allied",
+        "first" : "initiator",
+        "second" : "responder",
+        "value" : false
+      }]
+    },
+
+    {
+      "name" : "attackNation",
+      "displayName" : "Attack A Nation",
+      "conditions" : [{
+        "class" : "relationships",
+        "type" : "at war",
+        "first" : "initiator",
+        "second" : "responder",
+        "value" : true
+      }
+      ],
+      "influenceRules" : [],
+      "effects" : [{
+        "class" : "relations",
+        "type" : "relations",
+        "first" : "initiator",
+        "second" : "responder",
+        "operator" : "-",
+        "value" : 5
+      },{
+        "class" : "relations",
+        "type" : "relations",
+        "first" : "responder",
+        "second" : "initiator",
+        "operator" : "-",
+        "value" : 5
+      },{
+        "class" : "stats",
+        "type" : "army",
+        "first" : "responder",
+        "second" : "initiator",
+        "operator" : "-",
+        "value" : 10
+      },{
+        "class" : "stats",
+        "type" : "army",
+        "first" : "initiator",
+        "second" : "responder",
+        "operator" : "-",
+        "value" : 10
+      }]
+    },
+
+    {
+      "name" : "tradeFoodforFuel",
+      "displayName" : "Trade Food for Fuel",
+      "conditions" : [
+        {
+          "class" : "relationships",
+          "type" : "at war",
+          "first" : "initiator",
+          "second" : "responder",
+          "value" : false
+        },
+        {
+          "class" : "resourceAmount",
+          "type" : "foodamount",
+          "first" : "initiator",
+          "value" : 10,
+          "operator" : ">"
+        },
+        {
+          "class" : "resourceAmount",
+          "type" : "fuelamount",
+          "first" : "responder",
+          "value" : 10,
+          "operator" : ">"
+        }
+      ],
+      "influenceRules" : [],
+      "effects" : [{
+        "class" : "resourceAmount",
+        "type" : "foodamount",
+        "first" : "initiator",
+        "value" : 10,
+        "operator" : "-"
+      },
+        {
+          "class" : "resourceAmount",
+          "type" : "fuelamount",
+          "first" : "responder",
+          "value" : 10,
+          "operator" : "-"
+        },{
+          "class" : "resourceAmount",
+          "type" : "foodamount",
+          "first" : "responder",
+          "value" : 10,
+          "operator" : "+"
+        },
+        {
+          "class" : "resourceAmount",
+          "type" : "fuelamount",
+          "first" : "initiator",
+          "value" : 10,
+          "operator" : "+"
+        },{
+          "class" : "relations",
+          "type" : "relations",
+          "first" : "responder",
+          "second": "initiator",
+          "value" : 5,
+          "operator" : "+"
+        },
+        {
+          "class" : "relations",
+          "type" : "relations",
+          "first" : "initiator",
+          "second": "responder",
+          "value" : 5,
+          "operator" : "+"
+        }]
+    },
+
+    {
+      "name" : "tradeFoodforMetal",
+      "displayName" : "Trade Food for Metal",
+      "conditions" : [
+        {
+          "class" : "relationships",
+          "type" : "at war",
+          "first" : "initiator",
+          "second" : "responder",
+          "value" : false
+        },
+        {
+          "class" : "resourceAmount",
+          "type" : "foodamount",
+          "first" : "initiator",
+          "value" : 10,
+          "operator" : ">"
+        },
+        {
+          "class" : "resourceAmount",
+          "type" : "metalamount",
+          "first" : "responder",
+          "value" : 10,
+          "operator" : ">"
+        }
+      ],
+      "influenceRules" : [],
+      "effects" : [{
+        "class" : "resourceAmount",
+        "type" : "foodamount",
+        "first" : "initiator",
+        "value" : 10,
+        "operator" : "-"
+      },
+        {
+          "class" : "resourceAmount",
+          "type" : "metalamount",
+          "first" : "responder",
+          "value" : 10,
+          "operator" : "-"
+        },{
+          "class" : "resourceAmount",
+          "type" : "foodamount",
+          "first" : "responder",
+          "value" : 10,
+          "operator" : "+"
+        },
+        {
+          "class" : "resourceAmount",
+          "type" : "metalamount",
+          "first" : "initiator",
+          "value" : 10,
+          "operator" : "+"
+        },{
+          "class" : "relations",
+          "type" : "relations",
+          "first" : "responder",
+          "second": "initiator",
+          "value" : 5,
+          "operator" : "+"
+        },
+        {
+          "class" : "relations",
+          "type" : "relations",
+          "first" : "initiator",
+          "second": "responder",
+          "value" : 5,
+          "operator" : "+"
+        }]
+    },
+
+    {
+      "name" : "tradeFuelforFood",
+      "displayName" : "Trade Fuel for Food",
+      "conditions" : [
+        {
+          "class" : "relationships",
+          "type" : "at war",
+          "first" : "initiator",
+          "second" : "responder",
+          "value" : false
+        },
+        {
+          "class" : "resourceAmount",
+          "type" : "fuelamount",
+          "first" : "initiator",
+          "value" : 10,
+          "operator" : ">"
+        },
+        {
+          "class" : "resourceAmount",
+          "type" : "foodamount",
+          "first" : "responder",
+          "value" : 10,
+          "operator" : ">"
+        }
+      ],
+      "influenceRules" : [],
+      "effects" : [{
+        "class" : "resourceAmount",
+        "type" : "fuelamount",
+        "first" : "initiator",
+        "value" : 10,
+        "operator" : "-"
+      },
+        {
+          "class" : "resourceAmount",
+          "type" : "foodamount",
+          "first" : "responder",
+          "value" : 10,
+          "operator" : "-"
+        },{
+          "class" : "resourceAmount",
+          "type" : "fuelamount",
+          "first" : "responder",
+          "value" : 10,
+          "operator" : "+"
+        },
+        {
+          "class" : "resourceAmount",
+          "type" : "foodamount",
+          "first" : "initiator",
+          "value" : 10,
+          "operator" : "+"
+        },{
+          "class" : "relations",
+          "type" : "relations",
+          "first" : "responder",
+          "second": "initiator",
+          "value" : 5,
+          "operator" : "+"
+        },
+        {
+          "class" : "relations",
+          "type" : "relations",
+          "first" : "initiator",
+          "second": "responder",
+          "value" : 5,
+          "operator" : "+"
+        }]
+    },
+
+    {
+      "name" : "tradeFuelforMetal",
+      "displayName" : "Trade Fuel for Metal",
+      "conditions" : [
+        {
+          "class" : "relationships",
+          "type" : "at war",
+          "first" : "initiator",
+          "second" : "responder",
+          "value" : false
+        },
+        {
+          "class" : "resourceAmount",
+          "type" : "fuelamount",
+          "first" : "initiator",
+          "value" : 10,
+          "operator" : ">"
+        },
+        {
+          "class" : "resourceAmount",
+          "type" : "metalamount",
+          "first" : "responder",
+          "value" : 10,
+          "operator" : ">"
+        }
+      ],
+      "influenceRules" : [],
+      "effects" : [{
+        "class" : "resourceAmount",
+        "type" : "fuelamount",
+        "first" : "initiator",
+        "value" : 10,
+        "operator" : "-"
+      },
+        {
+          "class" : "resourceAmount",
+          "type" : "metalamount",
+          "first" : "responder",
+          "value" : 10,
+          "operator" : "-"
+        },{
+          "class" : "resourceAmount",
+          "type" : "fuelamount",
+          "first" : "responder",
+          "value" : 10,
+          "operator" : "+"
+        },
+        {
+          "class" : "resourceAmount",
+          "type" : "metalamount",
+          "first" : "initiator",
+          "value" : 10,
+          "operator" : "+"
+        },{
+          "class" : "relations",
+          "type" : "relations",
+          "first" : "responder",
+          "second": "initiator",
+          "value" : 5,
+          "operator" : "+"
+        },
+        {
+          "class" : "relations",
+          "type" : "relations",
+          "first" : "initiator",
+          "second": "responder",
+          "value" : 5,
+          "operator" : "+"
+        }]
+    },
+
+    {
+      "name" : "tradeMetalforFood",
+      "displayName" : "Trade Metal for Food",
+      "conditions" : [
+        {
+          "class" : "relationships",
+          "type" : "at war",
+          "first" : "initiator",
+          "second" : "responder",
+          "value" : false
+        },
+        {
+          "class" : "resourceAmount",
+          "type" : "metalamount",
+          "first" : "initiator",
+          "value" : 10,
+          "operator" : ">"
+        },
+        {
+          "class" : "resourceAmount",
+          "type" : "foodamount",
+          "first" : "responder",
+          "value" : 10,
+          "operator" : ">"
+        }
+      ],
+      "influenceRules" : [],
+      "effects" : [{
+        "class" : "resourceAmount",
+        "type" : "metalamount",
+        "first" : "initiator",
+        "value" : 10,
+        "operator" : "-"
+      },
+        {
+          "class" : "resourceAmount",
+          "type" : "foodamount",
+          "first" : "responder",
+          "value" : 10,
+          "operator" : "-"
+        },{
+          "class" : "resourceAmount",
+          "type" : "metalamount",
+          "first" : "responder",
+          "value" : 10,
+          "operator" : "+"
+        },
+        {
+          "class" : "resourceAmount",
+          "type" : "foodamount",
+          "first" : "initiator",
+          "value" : 10,
+          "operator" : "+"
+        },{
+          "class" : "relations",
+          "type" : "relations",
+          "first" : "responder",
+          "second": "initiator",
+          "value" : 5,
+          "operator" : "+"
+        },
+        {
+          "class" : "relations",
+          "type" : "relations",
+          "first" : "initiator",
+          "second": "responder",
+          "value" : 5,
+          "operator" : "+"
+        }]
+    },
+
+    {
+      "name" : "tradeMetalforFuel",
+      "displayName" : "Trade Metal for Fuel",
+      "conditions" : [
+        {
+          "class" : "relationships",
+          "type" : "at war",
+          "first" : "initiator",
+          "second" : "responder",
+          "value" : false
+        },
+        {
+          "class" : "resourceAmount",
+          "type" : "metalamount",
+          "first" : "initiator",
+          "value" : 10,
+          "operator" : ">"
+        },
+        {
+          "class" : "resourceAmount",
+          "type" : "fuelamount",
+          "first" : "responder",
+          "value" : 10,
+          "operator" : ">"
+        }
+      ],
+      "influenceRules" : [],
+      "effects" : [{
+        "class" : "resourceAmount",
+        "type" : "metalamount",
+        "first" : "initiator",
+        "value" : 10,
+        "operator" : "-"
+      },
+        {
+          "class" : "resourceAmount",
+          "type" : "fuelamount",
+          "first" : "responder",
+          "value" : 10,
+          "operator" : "-"
+        },{
+          "class" : "resourceAmount",
+          "type" : "metalamount",
+          "first" : "responder",
+          "value" : 10,
+          "operator" : "+"
+        },
+        {
+          "class" : "resourceAmount",
+          "type" : "fuelamount",
+          "first" : "initiator",
+          "value" : 10,
+          "operator" : "+"
+        },{
+          "class" : "relations",
+          "type" : "relations",
+          "first" : "responder",
+          "second": "initiator",
+          "value" : 5,
+          "operator" : "+"
+        },
+        {
+          "class" : "relations",
+          "type" : "relations",
+          "first" : "initiator",
+          "second": "responder",
+          "value" : 5,
+          "operator" : "+"
+        }]
+    },
+
+
+    {
+      "name" : "makeFood",
+      "displayName" : "make Food",
+      "conditions" : [
+        {
+          "class" : "resources",
+          "type" : "food",
+          "first" : "initiator",
+          "value" : true
+        }
+      ],
+      "influenceRules" : [],
+      "effects" : [{
+        "class" : "resourceAmount",
+        "type" : "foodamount",
+        "first" : "initiator",
+        "value" : 20,
+        "operator" : "+"
+      }]
+    },
+
+    {
+      "name" : "makeMetal",
+      "displayName" : "make Metal",
+      "conditions" : [
+        {
+          "class" : "resources",
+          "type" : "metal",
+          "first" : "initiator",
+          "value" : true
+        }
+      ],
+      "influenceRules" : [],
+      "effects" : [{
+        "class" : "resourceAmount",
+        "type" : "metalamount",
+        "first" : "initiator",
+        "value" : 20,
+        "operator" : "+"
+      }]
+    },
+
+    {
+      "name" : "makeFuel",
+      "displayName" : "make Fuel",
+      "conditions" : [
+        {
+          "class" : "resources",
+          "type" : "fuel",
+          "first" : "initiator",
+          "value" : true
+        }
+      ],
+      "influenceRules" : [],
+      "effects" : [{
+        "class" : "resourceAmount",
+        "type" : "fuel",
+        "first" : "initiator",
+        "value" : 20,
+        "operator" : "+"
+      }]
+    }
+  ]
+}
